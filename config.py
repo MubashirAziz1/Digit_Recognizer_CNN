@@ -1,6 +1,8 @@
 import os
 from dataclasses import dataclass
 from typing import Optional
+import torch
+
 
 
 @dataclass
@@ -35,7 +37,6 @@ class Config:
         
         # Set device
         if self.device == "auto":
-            import torch
             self.device = "cuda" if torch.cuda.is_available() else "cpu"
     
     @property

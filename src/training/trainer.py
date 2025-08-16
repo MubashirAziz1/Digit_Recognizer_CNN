@@ -33,22 +33,13 @@ class Trainer:
         
         for images, labels in self.train_loader:
             images, labels = images.to(self.device), labels.to(self.device)
-            
-            # Zero the gradients
-            self.optimizer.zero_grad()
-            
-            # Forward pass
-            outputs = self.model(images)
+
+            self.optimizer.zero_grad()      # Zero the gradients
+            outputs = self.model(images)    # Forward Pass
             loss = self.criterion(outputs, labels)
-            
-            # Backward pass
-            loss.backward()
-            
-            # Gradient clipping
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-            
-            # Update weights
-            self.optimizer.step()
+            loss.backward() # Backward Pass
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0) # Gradient Clipping
+            self.optimizer.step()   # Update weights
             
             running_loss += loss.item() * images.size(0)
         
@@ -80,15 +71,9 @@ class Trainer:
     def train(self, num_epochs: int, save_path: Optional[str] = None) -> Dict[str, List[float]]:
 
         best_val_acc = 0.0
-        
         for epoch in range(1, num_epochs + 1):
-            # Training phase
-            train_loss = self.train_epoch()
-            
-            # Validation phase
-            val_loss, val_acc = self.validate_epoch()
-            
-
+            train_loss = self.train_epoch()     #Training Phase
+            val_loss, val_acc = self.validate_epoch()   #Validation Phase
             
             # Store history
             self.train_losses.append(train_loss)
