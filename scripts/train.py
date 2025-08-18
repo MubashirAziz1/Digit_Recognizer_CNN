@@ -7,7 +7,7 @@ import pandas as pd
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from sklearn.model_selection import train_test_split
+
 
 # Add src to path
 #sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
@@ -15,7 +15,6 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
 from src.data.dataset import MNISTDataset
-from src.data.transforms import get_train_transforms, get_test_transforms
 from src.data.data_preprocessing import train_dataloader, val_dataloader, split_train_val, load_traintest_data
 from src.models.cnn import CNN
 from src.training.trainer import Trainer
@@ -38,10 +37,9 @@ def train_model(config: Config):
     """
     print("Starting model training...")
     
-    # Set random seed
     set_random_seed(config.random_seed)
     
-    # Load data ## use here the data_preprocssing.py file
+    # Load data 
     train_images, train_labels, _ = load_traintest_data(config)
     
     #Split the train and val data
