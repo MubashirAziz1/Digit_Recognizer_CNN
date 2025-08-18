@@ -105,15 +105,3 @@ class Trainer:
             'val_losses': self.val_losses,
             'val_accuracies': self.val_accuracies
         }
-    
-    def plot_training_history(self, save_path: Optional[str] = None):
-        """
-        Plot training history.
- 
-        """
-        plot_training_history(
-            self.train_losses, 
-            self.val_losses, 
-            self.val_accuracies,
-            save_path=save_path
-        ) 
