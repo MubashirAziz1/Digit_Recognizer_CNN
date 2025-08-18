@@ -4,11 +4,7 @@ from typing import Optional, Dict, Any
 
 def save_checkpoint(model, optimizer, epoch, val_acc, filepath, 
                     train_losses, val_losses,val_accuracies):
-    """
-    Save model checkpoint.
-
-    """
-    # Create directory if it doesn't exist
+    
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     
     checkpoint = {
@@ -26,10 +22,7 @@ def save_checkpoint(model, optimizer, epoch, val_acc, filepath,
 
 
 def load_checkpoint(model, optimizer, filepath):
-    """
-    Load model checkpoint.
-    
-    """
+
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"Checkpoint file not found: {filepath}")
     
